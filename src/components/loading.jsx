@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
-import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
-import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
-import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
 import "./loading.css";
 
 const Loading = () => {
@@ -129,8 +129,8 @@ const Loading = () => {
     textSprite.position.y = -2.5;
     scene.add(textSprite);
 
-    const rotationSpeedX = (Math.random() - 0.5) * 0.4;
-    const rotationSpeedY = (Math.random() - 0.5) * 0.4;
+    const rotationSpeedX = (Math.random() - 0.5) * 0.3;
+    const rotationSpeedY = (Math.random() - 0.5) * 0.3;
 
     // --- ✨ Added Clock for animation timing ---
     const clock = new THREE.Clock();

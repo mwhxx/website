@@ -39,7 +39,7 @@ export default function Works() {
             {/* 📌 Metadata Overlay */}
             <div className="absolute bottom-10 left-15 text-white">
               <h2
-                className="text-2xl font-bold max-w-[40rem]"
+                className="text-1xl font-bold max-w-[40rem]"
                 style={{
                   fontFamily:
                     "'Lucida Sans Unicode','Helvetica','Andale Mono','Lucida Grande'",
@@ -51,7 +51,7 @@ export default function Works() {
                 </span>
               </h2>
               <p
-                className="mt-2 md:text-[0.80rem] opacity-90 text-justify max-w-[31rem]"
+                className="mt-2 md:text-[0.80rem] opacity-90 text-justify max-w-[31rem] [@media(max-width:1650px)]:max-w-[28rem]"
                 style={{
                   fontFamily:
                     "'Lucida Sans Unicode','Helvetica','Andale Mono','Lucida Grande'",
