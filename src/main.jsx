@@ -1,7 +1,7 @@
-import { StrictMode } from "react";
+import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // main pages
 import App from "./App.jsx";
@@ -32,11 +32,14 @@ import CubeRangers from "./pages/aw_cuberangers.jsx";
 import VoicesWithin from "./pages/aw_voiceswithin.jsx";
 import Amdusuas from "./pages/aw_amdusuas.jsx";
 import VeiledTrading from "./pages/aw_veiledtrading.jsx";
-import Metalwireman from "./pages/aw_metalwireman";
+import Metalwireman from "./pages/aw_metalwireman.jsx";
 
-createRoot(document.getElementById("root")).render(
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
+
+root.render(
   <StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         {/* Main application routes */}
         <Route path="/" element={<App />} />
@@ -44,7 +47,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/works" element={<Works />} />
         <Route path="/exhibit" element={<Exhibit />} />
 
-        {/* Add a route for each individual work page */}
+        {/* Individual work pages */}
         <Route path="/works/aw_redandwhite" element={<RedAndWhite />} />
         <Route path="/works/aw_liverguardian" element={<LiverGuardian />} />
         <Route path="/works/aw_encage" element={<Encage />} />
@@ -67,12 +70,11 @@ createRoot(document.getElementById("root")).render(
         <Route path="/works/aw_mappm" element={<Mappm />} />
         <Route path="/works/aw_phantomrabbit" element={<PhantomRabbit />} />
         <Route path="/works/aw_cuberangers" element={<CubeRangers />} />
-        <Route path="/works/aw_metal-wireman" element={<About />} />
         <Route path="/works/aw_voiceswithin" element={<VoicesWithin />} />
-        <Route path="/works/aw_metalwireman" element={<Metalwireman />} />
         <Route path="/works/aw_amdusuas" element={<Amdusuas />} />
         <Route path="/works/aw_veiledtrading" element={<VeiledTrading />} />
+        <Route path="/works/aw_metalwireman" element={<Metalwireman />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>
 );
