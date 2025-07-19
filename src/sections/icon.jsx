@@ -13,7 +13,7 @@ export default function Background({ imageUrl }) {
   if ("colorSpace" in imageTexture) {
     imageTexture.colorSpace = THREE.SRGBColorSpace;
   } else {
-    imageTexture.encoding = THREE.sRGBEncoding;
+    imageTexture.encoding = THREE.SRGBColorSpace;
   }
   imageTexture.wrapS = THREE.RepeatWrapping;
   imageTexture.wrapT = THREE.RepeatWrapping;
@@ -57,7 +57,7 @@ export default function Background({ imageUrl }) {
         shadows
         gl={{
           physicallyCorrectLights: true,
-          outputEncoding: THREE.sRGBEncoding,
+          outputEncoding: THREE.SRGBColorSpace,
           toneMapping: THREE.ACESFilmicToneMapping,
           toneMappingExposure: 1.0,
         }}
@@ -125,7 +125,13 @@ export default function Background({ imageUrl }) {
 
         {/* Post‐processing */}
         <EffectComposer>
-          <SSAO radius={0.1} intensity={20} luminanceInfluence={0.1} />
+          <SSAO
+            radius={0.1}
+            intensity={20}
+            luminanceInfluence={0.1}
+            normalBuffer
+            depthBuffer
+          />
           <Bloom
             luminanceThreshold={0.1}
             intensity={1.8}

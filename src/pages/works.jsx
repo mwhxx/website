@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 // Vite public base path ("/website/" in production)
 const base = import.meta.env.BASE_URL;
-import Background from "../sections/background";
+import Background from "../sections/icon";
 import Navbar from "../sections/navbar";
 import Footer from "../sections/footer";
 import Gallery, { portfolioImages } from "../components/gallery";
