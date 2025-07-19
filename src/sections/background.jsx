@@ -2,7 +2,7 @@
 import React, { Suspense, useMemo, useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, CameraShake } from "@react-three/drei";
-import { EffectComposer, Bloom, SSAO } from "@react-three/postprocessing";
+import { EffectComposer, NormalPass, Bloom, SSAO } from "@react-three/postprocessing";
 import * as THREE from "three";
 import { Model } from "../components/model";
 
@@ -140,6 +140,7 @@ export default function Background() {
         </Suspense>
 
         <EffectComposer>
+          <NormalPass />
           <SSAO radius={0.1} intensity={20} luminanceInfluence={0.1} />
           <Bloom
             luminanceThreshold={0.1}

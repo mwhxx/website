@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 
+// Vite public base path ("/website/" in production)
+const base = import.meta.env.BASE_URL;
+
 function Navigation() {
   return (
     <ul className="flex items-center space-x-5 sm:space-x-15">
@@ -50,7 +53,7 @@ const Navbar = () => {
             className="flex cursor-pointer text-neutral-400 hover:text-white focus:outline-none sm:hidden"
           >
             <img
-              src={isOpen ? "/assets/close.svg" : "/assets/menu.svg"}
+              src={isOpen ? base + "assets/close.svg" : base + "assets/menu.svg"}
               className="w-6 h-6"
               alt={isOpen ? "Close menu" : "Open menu"}
             />
