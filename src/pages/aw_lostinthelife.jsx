@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import Background from "../sections/icon";
+// Vite public base path ("/website/" in production)
+const base = import.meta.env.BASE_URL;
+import Background from "../sections/background";
 import Navbar from "../sections/navbar";
 import Footer from "../sections/footer";
 import Gallery, { portfolioImages } from "../components/gallery";
@@ -7,7 +9,7 @@ import Gallery, { portfolioImages } from "../components/gallery";
 export default function aw_lostinthelife() {
   // ① Find the 'CMC' image object and set it as the default
   const defaultImage =
-    portfolioImages.find((img) => img.src.endsWith("/lostinthelife.png")) ||
+    portfolioImages.find((img) => img.src.endsWith("lostinthelife.png")) ||
     portfolioImages[0];
 
   // ② Store the 'CMC' image object in state. It will no longer change.
@@ -36,7 +38,7 @@ export default function aw_lostinthelife() {
             h-full [@media(max-width:1319px)]:top-[-20vh]
           "
             >
-              <Background imageUrl={hoveredImage.src} />
+              <Background imageUrl={base + hoveredImage.src} />
             </div>
 
             {/* Vertical Text "ANIMATION" */}
@@ -59,7 +61,7 @@ export default function aw_lostinthelife() {
 
             <div className="flex-1 mt-12 px-8 pb-8 overflow-auto">
               {/* Added Image */}
-              <img src="/assets/lostinthelife001.png" className="w-full mb-8" />
+              <img src={base + "assets/lostinthelife001.png"} className="w-full mb-8" />
 
               {/* Vimeo embed */}
               <div className="relative w-full aspect-video mb-8">

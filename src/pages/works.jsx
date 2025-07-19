@@ -1,6 +1,8 @@
 // src/pages/Works.jsx
 import React, { useState } from "react";
-import Background from "../sections/icon";
+// Vite public base path ("/website/" in production)
+const base = import.meta.env.BASE_URL;
+import Background from "../sections/background";
 import Navbar from "../sections/navbar";
 import Footer from "../sections/footer";
 import Gallery, { portfolioImages } from "../components/gallery";
@@ -8,7 +10,7 @@ import Gallery, { portfolioImages } from "../components/gallery";
 export default function Works() {
   // ① Pick a default image object (we'll choose the CMC entry)
   const defaultImage =
-    portfolioImages.find((img) => img.src.endsWith("/blood.png")) ||
+    portfolioImages.find((img) => img.src.endsWith("blood.png")) ||
     portfolioImages[0];
 
   // ② Store the entire image object in state
@@ -31,7 +33,7 @@ export default function Works() {
                          w-[125vw] [@media(max-width:1319px)]:w-[100vw]
                          h-full [@media(max-width:1319px)]:top-[-20vh]"
             >
-              <Background imageUrl={hoveredImage.src} />
+              <Background imageUrl={base + hoveredImage.src} />
             </div>
 
             {/* 📌 Metadata Overlay */}

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import Background from "../sections/icon";
+import Background from "../sections/background";
+// Vite public base path ("/website/" in production)
+const base = import.meta.env.BASE_URL;
 import Navbar from "../sections/navbar";
 import Footer from "../sections/footer";
 import Gallery, { portfolioImages } from "../components/gallery";
@@ -7,7 +9,7 @@ import Gallery, { portfolioImages } from "../components/gallery";
 export default function aw_liverguardian() {
   // ① Find the 'plab' image object and set it as the default
   const defaultImage =
-    portfolioImages.find((img) => img.src.endsWith("/liverguardian.png")) ||
+    portfolioImages.find((img) => img.src.endsWith("liverguardian.png")) ||
     portfolioImages[0];
 
   // ② Store the 'plab' image object in state. It will no longer change.
@@ -36,7 +38,7 @@ export default function aw_liverguardian() {
                 h-full [@media(max-width:1319px)]:top-[-20vh]
               "
             >
-              <Background imageUrl={hoveredImage.src} />
+              <Background imageUrl={base + hoveredImage.src} />
             </div>
 
             {/* Vertical Text "GAME DEVELOPMENT" */}
@@ -72,22 +74,22 @@ export default function aw_liverguardian() {
               {/* 2x2 Image Grid */}
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <img
-                  src="/assets/liverguardian001.png"
+                  src={base + "assets/liverguardian001.png"}
                   alt="E-PLS Screenshot 1"
                   className="w-full h-auto"
                 />
                 <img
-                  src="/assets/liverguardian004.png"
+                  src={base + "assets/liverguardian004.png"}
                   alt="E-PLS Screenshot 2"
                   className="w-full h-auto"
                 />
                 <img
-                  src="/assets/liverguardian002.png"
+                  src={base + "assets/liverguardian002.png"}
                   alt="E-PLS Screenshot 3"
                   className="w-full h-auto"
                 />
                 <img
-                  src="/assets/liverguardian003.png"
+                  src={base + "assets/liverguardian003.png"}
                   alt="E-PLS Screenshot 4"
                   className="w-full h-auto"
                 />

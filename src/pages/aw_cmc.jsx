@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import Background from "../sections/icon";
+// Vite public base path ("/website/" in production)
+const base = import.meta.env.BASE_URL;
+import Background from "../sections/background";
 import Navbar from "../sections/navbar";
 import Footer from "../sections/footer";
 import Gallery, { portfolioImages } from "../components/gallery";
@@ -7,7 +9,7 @@ import Gallery, { portfolioImages } from "../components/gallery";
 export default function aw_cmc() {
   // ① Find the 'CMC' image object and set it as the default
   const defaultImage =
-    portfolioImages.find((img) => img.src.endsWith("/cmc.png")) ||
+    portfolioImages.find((img) => img.src.endsWith("cmc.png")) ||
     portfolioImages[0];
 
   // ② Store the 'CMC' image object in state. It will no longer change.
@@ -36,7 +38,7 @@ export default function aw_cmc() {
                 h-full [@media(max-width:1319px)]:top-[-20vh]
               "
             >
-              <Background imageUrl={hoveredImage.src} />
+              <Background imageUrl={base + hoveredImage.src} />
             </div>
 
             {/* Vertical Text "ANIMATION" */}
@@ -71,7 +73,7 @@ export default function aw_cmc() {
 
               {/* Added Image */}
               <img
-                src="/assets/cmc001.png"
+                src={base + "assets/cmc001.png"}
                 alt="3D render of the CMC building"
                 className="w-full mb-8"
               />

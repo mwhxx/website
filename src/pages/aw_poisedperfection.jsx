@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import Background from "../sections/icon";
+// Vite public base path ("/website/" in production)
+const base = import.meta.env.BASE_URL;
+
+import Background from "../sections/background";
 import Navbar from "../sections/navbar";
 import Footer from "../sections/footer";
 import Gallery, { portfolioImages } from "../components/gallery";
@@ -7,7 +10,7 @@ import Gallery, { portfolioImages } from "../components/gallery";
 export default function aw_poisedperfection() {
   // ① Find the 'CMC' image object and set it as the default
   const defaultImage =
-    portfolioImages.find((img) => img.src.endsWith("/poisedperfection.png")) ||
+    portfolioImages.find((img) => img.src.endsWith("poisedperfection.png")) ||
     portfolioImages[0];
 
   // ② Store the 'CMC' image object in state. It will no longer change.
@@ -36,7 +39,7 @@ export default function aw_poisedperfection() {
                 h-full [@media(max-width:1319px)]:top-[-20vh]
               "
             >
-              <Background imageUrl={hoveredImage.src} />
+              <Background imageUrl={base + hoveredImage.src} />
             </div>
 
             {/* Vertical Text "ANIMATION" */}
@@ -60,7 +63,7 @@ export default function aw_poisedperfection() {
             <div className="flex-1 mt-12 px-8 pb-8 overflow-auto">
               {/* Main Image */}
               <img
-                src="/assets/pp001.png"
+                src={base + "assets/pp001.png"}
                 alt="Poised Perfection main installation view"
                 className="w-full mb-8"
               />
@@ -82,14 +85,14 @@ export default function aw_poisedperfection() {
                 <div>
                   <img
                     className="h-auto max-w-full"
-                    src="/assets/pp005.png"
+                    src={base + "assets/pp005.png"}
                     alt="Installation detail shot 1"
                   />
                 </div>
                 <div>
                   <img
                     className="h-auto max-w-full"
-                    src="/assets/pp006.png"
+                    src={base + "assets/pp006.png"}
                     alt="Installation detail shot 2"
                   />
                 </div>
@@ -97,14 +100,14 @@ export default function aw_poisedperfection() {
                 <div>
                   <img
                     className="h-auto max-w-full"
-                    src="/assets/pp002.png"
+                    src={base + "assets/pp002.png"}
                     alt="Installation detail shot 3"
                   />
                 </div>
                 <div>
                   <img
                     className="h-auto max-w-full"
-                    src="/assets/pp003.png"
+                    src={base + "assets/pp003.png"}
                     alt="Installation detail shot 4"
                   />
                 </div>
@@ -112,14 +115,14 @@ export default function aw_poisedperfection() {
                 <div>
                   <img
                     className="h-auto max-w-full"
-                    src="/assets/pp004.png"
+                    src={base + "assets/pp004.png"}
                     alt="Installation detail shot 5"
                   />
                 </div>
                 <div>
                   <img
                     className="h-auto max-w-full"
-                    src="/assets/pp007.png"
+                    src={base + "assets/pp007.png"}
                     alt="Installation detail shot 6"
                   />
                 </div>

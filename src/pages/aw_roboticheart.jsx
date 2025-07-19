@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import Background from "../sections/icon";
+// Vite public base path ("/website/" in production)
+const base = import.meta.env.BASE_URL;
+import Background from "../sections/background";
 import Navbar from "../sections/navbar";
 import Footer from "../sections/footer";
 import Gallery, { portfolioImages } from "../components/gallery";
@@ -190,7 +192,7 @@ const P5Sketch = ({ sketch }) => {
 // ===================================================================
 export default function aw_roboticheart() {
   const defaultImage =
-    portfolioImages.find((img) => img.src.endsWith("/roboticheart.png")) ||
+    portfolioImages.find((img) => img.src.endsWith("roboticheart.png")) ||
     portfolioImages[0];
   const [hoveredImage] = useState(defaultImage);
 
@@ -216,7 +218,7 @@ export default function aw_roboticheart() {
                 h-full [@media(max-width:1319px)]:top-[-20vh]
               "
             >
-              <Background imageUrl={hoveredImage.src} />
+              <Background imageUrl={base + hoveredImage.src} />
             </div>
 
             {/* Vertical Text */}

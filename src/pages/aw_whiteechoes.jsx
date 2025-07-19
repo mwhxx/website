@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import Background from "../sections/icon";
+// Vite public base path ("/website/" in production)
+const base = import.meta.env.BASE_URL;
+import Background from "../sections/background";
 import Navbar from "../sections/navbar";
 import Footer from "../sections/footer";
 import Gallery, { portfolioImages } from "../components/gallery";
@@ -7,7 +9,7 @@ import Gallery, { portfolioImages } from "../components/gallery";
 export default function aw_whiteechoes() {
   // ① Find the 'whiteechoes.png' image object and set it as the default
   const defaultImage =
-    portfolioImages.find((img) => img.src.endsWith("/whiteechoes.png")) ||
+    portfolioImages.find((img) => img.src.endsWith("whiteechoes.png")) ||
     portfolioImages[0];
 
   // ② Store the image object in state. It will no longer change.
@@ -36,7 +38,7 @@ export default function aw_whiteechoes() {
                 h-full [@media(max-width:1319px)]:top-[-20vh]
               "
             >
-              <Background imageUrl={hoveredImage.src} />
+              <Background imageUrl={base + hoveredImage.src} />
             </div>
 
             {/* Vertical Text */}
@@ -60,12 +62,12 @@ export default function aw_whiteechoes() {
             <div className="flex-1 mt-12 px-8 pb-8 overflow-auto">
               {/* Main Image */}
               <img
-                src="/assets/whiteechoes001.png"
+                src={base + "assets/whiteechoes001.png"}
                 alt="White Echoes installation view"
                 className="w-full mb-8"
               />
               <img
-                src="/assets/whiteechoes004.png"
+                src={base + "assets/whiteechoes004.png"}
                 alt="White Echoes installation view"
                 className="w-full mb-8"
               />

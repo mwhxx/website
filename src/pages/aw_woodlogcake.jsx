@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import Background from "../sections/icon";
+// Vite public base path ("/website/" in production)
+const base = import.meta.env.BASE_URL;
+import Background from "../sections/background";
 import Navbar from "../sections/navbar";
 import Footer from "../sections/footer";
 import Gallery, { portfolioImages } from "../components/gallery";
 
-export default function aw_cmc() {
+export default function aw_woodlogcake() {
   // ① Find the 'CMC' image object and set it as the default
   const defaultImage =
-    portfolioImages.find((img) => img.src.endsWith("/woodlogcake.png")) ||
+    portfolioImages.find((img) => img.src.endsWith("woodlogcake.png")) ||
     portfolioImages[0];
 
   // ② Store the 'CMC' image object in state. It will no longer change.
@@ -36,7 +38,7 @@ export default function aw_cmc() {
                 h-full [@media(max-width:1319px)]:top-[-20vh]
               "
             >
-              <Background imageUrl={hoveredImage.src} />
+              <Background imageUrl={base + hoveredImage.src} />
             </div>
 
             {/* Vertical Text "ANIMATION" */}
@@ -59,8 +61,8 @@ export default function aw_cmc() {
 
             <div className="flex-1 mt-12 px-8 pb-8 overflow-auto">
               {/* Added Image */}
-              <img src="/assets/woodlogcake001.png" className="w-full mb-8" />
-              <img src="/assets/woodlogcake002.png" className="w-full mb-8" />
+              <img src={base + "assets/woodlogcake001.png"} className="w-full mb-8" />
+              <img src={base + "assets/woodlogcake002.png"} className="w-full mb-8" />
 
               {/* Title row with Year */}
               <div className="flex justify-between items-baseline mb-4">
