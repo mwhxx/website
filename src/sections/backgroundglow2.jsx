@@ -1,4 +1,5 @@
-import React, { Suspense, useMemo, useRef, useEffect } from "react";
+// src/sections/background.jsx  (or wherever this file lives)
+import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, CameraShake } from "@react-three/drei";
 import { EffectComposer, Bloom, SSAO } from "@react-three/postprocessing";
@@ -12,7 +13,7 @@ const wallMaterial = new THREE.MeshStandardMaterial({
   roughness: 0.9,
 });
 
-// — Glowing material just for the frame —
+// — Glowing material just for the frame/videoimage —
 const frameMaterial = new THREE.MeshStandardMaterial({
   color: "#222222", // base color
   metalness: 0.2,
@@ -23,8 +24,6 @@ const frameMaterial = new THREE.MeshStandardMaterial({
 frameMaterial.toneMapped = false;
 
 export default function Background() {
-  // All video texture setup has been removed as per your request.
-
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
       <Canvas
@@ -49,38 +48,38 @@ export default function Background() {
         />
 
         <Suspense fallback={null}>
+          {/* All URLs are now relative: "models/…" */}
           <Model
-            url="/models/floor.obj"
+            url="models/floor.obj"
             applyFloorTextures
             receiveShadow
             position={[0, -2.5, 0]}
             scale={1}
           />
           <Model
-            url="/models/frame.obj"
+            url="models/frame.obj"
             material={wallMaterial}
             castShadow
             position={[0, -2.5, 0]}
             scale={1}
           />
           <Model
-            url="/models/part1.obj"
+            url="models/part1.obj"
             material={wallMaterial}
             castShadow
             position={[0, -2.5, 0]}
             scale={1}
           />
           <Model
-            url="/models/part2.obj"
+            url="models/part2.obj"
             material={wallMaterial}
             castShadow
             position={[0, -2.5, 0]}
             scale={1}
           />
-          {/* Apply the new glowing material to videoimage.obj */}
           <Model
-            url="/models/videoimage.obj"
-            material={frameMaterial} // Using the new glowing material
+            url="models/videoimage.obj"
+            material={frameMaterial} // glowing material
             position={[0, -2.5, 0]}
             scale={1}
           />

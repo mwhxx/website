@@ -13,22 +13,30 @@ export function Model({
   position = [0, 0, 0],
   scale = 1,
 }) {
-  // 1. load the OBJ
-  const obj = useLoader(OBJLoader, url);
+  // Vite's base URL ("/website/" in production)
+  const base = import.meta.env.BASE_URL;
 
-  // 2. load floor textures (we’ll only use them if applyFloorTextures is true)
+  // 1. Load the OBJ, prepending the base path
+  const obj = useLoader(
+    OBJLoader,
+    // e.g. "models/floor.obj" → "/website/models/floor.obj"
+    base + url
+  );
+
+  // 2. Load floor textures with the same base path
   const [colorMap, normalMap, roughnessMap, metalnessMap] = useTexture([
-    "/textures/floor/floor_initialShadingGroup_BaseColor.png",
-    "/textures/floor/floor_initialShadingGroup_Normal.png",
-    "/textures/floor/floor_initialShadingGroup_Roughness.png",
-    "/textures/floor/floor_initialShadingGroup_Metallic.png",
+    base + "textures/floor/floor_initialShadingGroup_BaseColor.png",
+    base + "textures/floor/floor_initialShadingGroup_Normal.png",
+    base + "textures/floor/floor_initialShadingGroup_Roughness.png",
+    base + "textures/floor/floor_initialShadingGroup_Metallic.png",
   ]);
 
+  // 3. Apply materials & shadows once loaded
   useEffect(() => {
     obj.traverse((child) => {
       if (!child.isMesh) return;
 
-      // swap in the floor material?
+      // If flag set, swap in our floor textures
       if (applyFloorTextures) {
         child.material = new THREE.MeshStandardMaterial({
           map: colorMap,
@@ -39,8 +47,9 @@ export function Model({
           roughness: 1,
           metalness: 1,
         });
-      } else if (material) {
-        // or use the passed‐in material
+      }
+      // Or use a custom material passed in
+      else if (material) {
         child.material = material;
       }
 
@@ -60,5 +69,6 @@ export function Model({
     receiveShadow,
   ]);
 
+  // 4. Render the loaded object
   return <primitive object={obj} position={position} scale={scale} />;
 }

@@ -1,3 +1,4 @@
+// src/sections/background.jsx
 import React, { Suspense, useMemo, useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, CameraShake } from "@react-three/drei";
@@ -14,30 +15,33 @@ const wallMaterial = new THREE.MeshStandardMaterial({
 
 // — Glowing material just for the frame —
 const frameMaterial = new THREE.MeshStandardMaterial({
-  color: "#222222", // base color
+  color: "#222222",
   metalness: 0.2,
   roughness: 0.3,
-  emissive: new THREE.Color("#ffffff"), // glow color
-  emissiveIntensity: 1.3, // glow strength
+  emissive: new THREE.Color("#ffffff"),
+  emissiveIntensity: 1.3,
 });
 frameMaterial.toneMapped = false;
 
 export default function Background() {
+  // Vite’s base public path ("/website/" in prod)
+  const base = import.meta.env.BASE_URL;
+
   // --- Video Texture Setup ---
   const videoRef = useRef();
 
   const video = useMemo(() => {
     const vid = document.createElement("video");
-    vid.src = "/textures/encage.mp4";
+    // prefix the base path here
+    vid.src = base + "textures/encage.mp4";
     vid.crossOrigin = "Anonymous";
     vid.loop = true;
     vid.muted = true;
     vid.playsInline = true;
     return vid;
-  }, []);
+  }, [base]);
 
   useEffect(() => {
-    // attach video element to ref for Safari compatibility
     if (videoRef.current) return;
     videoRef.current = video;
     video.play().catch((err) => console.warn("Video play prevented:", err));
@@ -90,29 +94,30 @@ export default function Background() {
         />
 
         <Suspense fallback={null}>
+          {/* pass relative paths (no leading slash) */}
           <Model
-            url="/models/floor.obj"
+            url="models/floor.obj"
             applyFloorTextures
             receiveShadow
             position={[0, -2.5, 0]}
             scale={1}
           />
           <Model
-            url="/models/frame.obj"
+            url="models/frame.obj"
             material={frameMaterial}
             castShadow
             position={[0, -2.5, 0]}
             scale={1}
           />
           <Model
-            url="/models/part1.obj"
+            url="models/part1.obj"
             material={wallMaterial}
             castShadow
             position={[0, -2.5, 0]}
             scale={1}
           />
           <Model
-            url="/models/part2.obj"
+            url="models/part2.obj"
             material={wallMaterial}
             castShadow
             position={[0, -2.5, 0]}
@@ -120,14 +125,14 @@ export default function Background() {
           />
           {videoMaterial && (
             <Model
-              url="/models/videoimage.obj"
+              url="models/videoimage.obj"
               material={videoMaterial}
               position={[0, -2.5, 0]}
               scale={1}
             />
           )}
           <Model
-            url="/models/audience.obj"
+            url="models/audience.obj"
             material={wallMaterial}
             position={[1, -2.5, 4]}
             scale={0.85}
