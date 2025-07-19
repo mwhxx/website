@@ -43,7 +43,7 @@ export default function About() {
 
         {/* Artist's statement / description */}
         <p
-          className="text-[0.9rem] mb-4 max-w-[33em] leading-relaxed text-justify"
+          className="text-[0.9rem] mb-4 max-w-[34em] leading-relaxed text-justify"
           style={{
             fontFamily:
               "'Intel One Mono','Helvetica','Andale Mono','Lucida Grande'",

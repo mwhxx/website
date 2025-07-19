@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Background from "../sections/background";
-// Vite public base path ("/website/" in production)
+import Background from "../sections/icon";
 const base = import.meta.env.BASE_URL;
 import Navbar from "../sections/navbar";
 import Footer from "../sections/footer";
