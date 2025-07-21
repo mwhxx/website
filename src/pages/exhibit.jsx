@@ -48,7 +48,7 @@ export default function Exhibit() {
             rel="noopener noreferrer"
             className="block no-underline text-white"
           >
-            12 JUL - 28 JUL 2024
+            12 July - 28 July 2024
             <br />
             <strong>SCM Annual 2024</strong>, School of Creative Media, City
             University of Hong Kong, HKSAR
@@ -62,7 +62,7 @@ export default function Exhibit() {
             rel="noopener noreferrer"
             className="block no-underline text-white"
           >
-            14 JUN - 24 JUN 2024
+            14 June - 24 June 2024
             <br />
             <strong>18th SIG Playful Media Showcase 2024</strong>, School of
             Creative Media, City University of Hong Kong, HKSAR
