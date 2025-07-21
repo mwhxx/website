@@ -224,7 +224,7 @@ export default function aw_redandwhite() {
                       "'Lucida Sans Unicode','Helvetica','Andale Mono','Lucida Grande'",
                   }}
                 >
-                  “Red and White” is a critical software artw that translates
+                  “Red and White” is a critical software art that translates
                   the silent, internal conflict of G6PD (Glucose-6-Phosphate
                   Dehydrogenase) deficiency into a dynamic visual experience.
                   The piece explores the fragility of the human body at a
