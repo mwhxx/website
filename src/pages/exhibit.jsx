@@ -1,29 +1,57 @@
 // src/pages/Exhibit.jsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Background from "../sections/backgroundglow";
 import Navbar from "../sections/navbar";
 import Footer from "../sections/footer";
 
 export default function Exhibit() {
+  const [isLoaded, setIsLoaded] = useState(false);
+  // 1. Add new state for text animation
+  const [isTextVisible, setIsTextVisible] = useState(false);
+
+  useEffect(() => {
+    // Background fade-in
+    setIsLoaded(true);
+
+    // 2. Delay the text animation
+    const timer = setTimeout(() => {
+      setIsTextVisible(true);
+    }, 500); // 500ms delay
+
+    // Clean up the timer when the component unmounts
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="relative w-screen h-screen overflow-hidden">
-      {/* Full-screen 3D background */}
-      <Background />
+      {/* Background with fade-in */}
+      <div
+        className={`transition-opacity duration-[2000ms] ease-in ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <Background />
+      </div>
 
       {/* Navbar on top */}
       <div className="absolute top-0 left-0 w-full z-10">
         <Navbar />
       </div>
 
-      {/* Exhibition Content – semi-transparent text with full-line links */}
+      {/* 3. Exhibition Content with fade-and-slide-up effect */}
       <div
-        className="
+        className={`
           absolute top-30 left-0 w-full
           px-8 md:px-16 lg:px-32
           text-white text-left z-10
           pointer-events-auto
-          opacity-75
-        "
+          transition-all duration-2500 ease-out
+          ${
+            isTextVisible
+              ? "opacity-75 translate-y-0"
+              : "opacity-0 translate-y-5"
+          }
+        `}
         style={{
           fontFamily:
             "'Intel One Mono','Helvetica','Andale Mono','Lucida Grande'",
