@@ -1,5 +1,5 @@
 // src/components/Gallery.jsx
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 
 // Full list of portfolio images with a 'slug' for URL routing
@@ -207,13 +207,27 @@ export const portfolioImages = [
 const Gallery = ({ onHoverImage }) => {
   // Vite’s base public path ("/website/" in prod)
   const base = import.meta.env.BASE_URL;
+  const durations = useMemo(
+    () => portfolioImages.map(() => Math.floor(Math.random() * 1501)),
+    []
+  );
+  const [visible, setVisible] = useState(
+    portfolioImages.map(() => false)
+  );
+  useEffect(() => {
+    setVisible(portfolioImages.map(() => true));
+  }, []);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {portfolioImages.map((image, index) => (
         <Link to={`/works/${image.slug}`} key={index}>
           <div
-            className="group relative aspect-square overflow-hidden cursor-pointer"
+            className="group relative aspect-square overflow-hidden cursor-pointer transition-opacity ease-in [transition-duration:2500ms]"
+            style={{
+              opacity: visible[index] ? 1 : 0,
+              transitionDuration: `${durations[index]}ms`,
+            }}
             onMouseEnter={() => onHoverImage(image)}
           >
             {/* Thumbnail */}

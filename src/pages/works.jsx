@@ -1,5 +1,5 @@
 // src/pages/Works.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // Vite public base path ("/website/" in production)
 const base = import.meta.env.BASE_URL;
 import Background from "../sections/icon";
@@ -16,6 +16,12 @@ export default function Works() {
   // ② Store the entire image object in state
   const [hoveredImage, setHoveredImage] = useState(defaultImage);
 
+  // ③ Fade‐in flag for left panel on mount
+  const [leftFadeIn, setLeftFadeIn] = useState(false);
+  useEffect(() => {
+    setLeftFadeIn(true);
+  }, []);
+
   return (
     <div className="relative w-screen h-screen overflow-hidden">
       {/* ==== two-panel grid ==== */}
@@ -27,7 +33,11 @@ export default function Works() {
                      [@media(max-width:1319px)]:grid-cols-1"
         >
           {/* Left panel: 3D canvas + metadata overlay */}
-          <div className="relative w-full h-full overflow-hidden">
+          <div
+            className={`relative w-full h-full overflow-hidden
+                        transition-opacity duration-1500 ease-in
+                        ${leftFadeIn ? "opacity-100" : "opacity-0"}`}
+          >
             <div
               className="absolute top-0 left-1/2 transform -translate-x-1/2
                          w-[125vw] [@media(max-width:1319px)]:w-[100vw]
