@@ -129,8 +129,8 @@ const Loading = () => {
     textSprite.position.y = -2.5;
     scene.add(textSprite);
 
-    const rotationSpeedX = (Math.random() - 0.5) * 0.3;
-    const rotationSpeedY = (Math.random() - 0.5) * 0.3;
+    const rotationSpeedX = (Math.random() - 0.5) * 0.27;
+    const rotationSpeedY = (Math.random() - 0.5) * 0.27;
 
     // --- ✨ Added Clock for animation timing ---
     const clock = new THREE.Clock();

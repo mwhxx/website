@@ -140,7 +140,13 @@ export default function Background() {
         </Suspense>
 
         <EffectComposer>
-          <SSAO radius={0.1} intensity={20} luminanceInfluence={0.1} normalBuffer depthBuffer />
+          <SSAO
+            radius={0.1}
+            intensity={20}
+            luminanceInfluence={0.1}
+            normalBuffer
+            depthBuffer
+          />
           <Bloom
             luminanceThreshold={0.1}
             intensity={2.8}
