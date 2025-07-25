@@ -1,20 +1,36 @@
-import React from "react";
+// src/App.jsx
+import React, { useState, useEffect } from "react";
 import Background from "./sections/background";
 import Navbar from "./sections/navbar";
 import Title from "./sections/title";
 import Footer from "./sections/footer";
 
 export default function App() {
+  // Only control the background animation now
+  const [isBgVisible, setIsBgVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsBgVisible(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="relative w-screen h-screen overflow-hidden">
-      {/* Full-screen 3D background */}
-      <Background />
+      {/* Background blur→focus */}
+      <div
+        className={`transition-all duration-2000 ease-in-out ${
+          isBgVisible ? "opacity-100 blur-0" : "opacity-0 blur-lg"
+        }`}
+      >
+        <Background />
+      </div>
 
-      {/* Navbar on top */}
+      {/* Navbar (static) */}
       <div className="absolute top-0 left-0 w-full z-10">
         <Navbar />
       </div>
 
+      {/* Title */}
       <div
         className="
           absolute inset-0 flex flex-col items-start justify-center
@@ -27,7 +43,7 @@ export default function App() {
         <Title />
       </div>
 
-      {/* Footer on top */}
+      {/* Footer (static) */}
       <div className="absolute bottom-0 left-0 w-full z-10">
         <Footer />
       </div>

@@ -5,20 +5,12 @@ import Navbar from "../sections/navbar";
 import Footer from "../sections/footer";
 
 export default function Exhibit() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  // 1. Add new state for text animation
+  const [isBgVisible, setIsBgVisible] = useState(false);
   const [isTextVisible, setIsTextVisible] = useState(false);
 
   useEffect(() => {
-    // Background fade-in
-    setIsLoaded(true);
-
-    // 2. Delay the text animation
-    const timer = setTimeout(() => {
-      setIsTextVisible(true);
-    }, 500); // 500ms delay
-
-    // Clean up the timer when the component unmounts
+    setIsBgVisible(true);
+    const timer = setTimeout(() => setIsTextVisible(true), 500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -26,30 +18,31 @@ export default function Exhibit() {
     <div className="relative w-screen h-screen overflow-hidden">
       {/* Background with fade-in */}
       <div
-        className={`transition-opacity duration-[2000ms] ease-in ${
-          isLoaded ? "opacity-100" : "opacity-0"
+        className={`absolute inset-0 transition-opacity duration-[2000ms] ease-in ${
+          isBgVisible ? "opacity-100" : "opacity-0"
         }`}
       >
         <Background />
       </div>
 
-      {/* Navbar on top */}
+      {/* Navbar (static) */}
       <div className="absolute top-0 left-0 w-full z-10">
         <Navbar />
       </div>
 
-      {/* 3. Exhibition Content with fade-and-slide-up effect */}
+      {/* Text block: Aligned left */}
       <div
         className={`
-          absolute top-30 left-0 w-full
+          absolute top-32 left-0 z-10
+          w-full
           px-8 md:px-16 lg:px-32
-          text-white text-left z-10
+          text-white text-left
           pointer-events-auto
-          transition-all duration-2500 ease-out
+          transition-all duration-700 ease-out
           ${
             isTextVisible
-              ? "opacity-75 translate-y-0"
-              : "opacity-0 translate-y-5"
+              ? "opacity-90 translate-y-0"
+              : "opacity-0 translate-y-4"
           }
         `}
         style={{
@@ -69,40 +62,41 @@ export default function Exhibit() {
           Exhibition
         </h2>
 
-        <p className="mt-2" style={{ fontSize: "0.85rem" }}>
+        <p className="mt-2 text-[0.85rem]">
           <a
             href="https://www.scm.cityu.edu.hk/events/scm-annual-2024"
             target="_blank"
             rel="noopener noreferrer"
-            className="block no-underline text-white"
+            // The class is now 'inline-block' to shrink the clickable area to the text size.
+            className="inline-block no-underline text-white"
           >
-            12 July - 28 July 2024
+            12 July – 28 July 2024
             <br />
             <strong>SCM Annual 2024</strong>, School of Creative Media, City
             University of Hong Kong, HKSAR
           </a>
         </p>
 
-        <p className="mt-4" style={{ fontSize: "0.85rem" }}>
+        <p className="mt-4 text-[0.85rem]">
           <a
             href="https://www.playfulmedia.hk/2024/"
             target="_blank"
             rel="noopener noreferrer"
-            className="block no-underline text-white"
+            className="inline-block no-underline text-white"
           >
-            14 June - 24 June 2024
+            14 June – 24 June 2024
             <br />
             <strong>18th SIG Playful Media Showcase 2024</strong>, School of
             Creative Media, City University of Hong Kong, HKSAR
           </a>
         </p>
 
-        <p className="mt-4" style={{ fontSize: "0.85rem" }}>
+        <p className="mt-4 text-[0.85rem]">
           <a
             href="https://openprocessing.org/curation/87594/"
             target="_blank"
             rel="noopener noreferrer"
-            className="block no-underline text-white"
+            className="inline-block no-underline text-white"
           >
             April 2024
             <br />
@@ -112,7 +106,7 @@ export default function Exhibit() {
         </p>
       </div>
 
-      {/* Footer on top */}
+      {/* Footer (static) */}
       <div className="absolute bottom-0 left-0 w-full z-10">
         <Footer />
       </div>
