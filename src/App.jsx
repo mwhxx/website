@@ -1,25 +1,40 @@
-// src/App.jsx
 import React, { useState, useEffect } from "react";
+import { useProgress } from "@react-three/drei";
 import Background from "./sections/background";
 import Navbar from "./sections/navbar";
 import Title from "./sections/title";
 import Footer from "./sections/footer";
+import Loading from "./components/loading";
 
 export default function App() {
-  // Only control the background animation now
+  const { progress, total } = useProgress();
   const [isBgVisible, setIsBgVisible] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsBgVisible(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
+    // Wait until progress is 100 AND Three.js has registered the assets (total > 0)
+    if (progress === 100 && total > 0) {
+      const timer = setTimeout(() => setIsBgVisible(true), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [progress, total]);
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden">
-      {/* Background blur→focus */}
+    <div className="relative w-screen h-screen overflow-hidden bg-black text-white">
+      {/* Loading Screen Overlay */}
       <div
-        className={`transition-all duration-2000 ease-in-out ${
-          isBgVisible ? "opacity-100 blur-0" : "opacity-0 blur-lg"
+        className={`absolute inset-0 z-50 transition-opacity duration-1000 ease-in-out ${
+          isBgVisible ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
+        style={{ backgroundColor: "#000000" }}
+      >
+        {/* Custom 3D Loading Effect (Text Removed) */}
+        <Loading />
+      </div>
+
+      {/* Background purely fading in (No Blur for Safari compatibility) */}
+      <div
+        className={`transition-opacity duration-2000 ease-in-out w-full h-full ${
+          isBgVisible ? "opacity-100" : "opacity-0"
         }`}
       >
         <Background />

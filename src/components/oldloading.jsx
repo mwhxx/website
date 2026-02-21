@@ -4,13 +4,13 @@ import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
+import "./loading.css";
 
-export default function Loading() {
+const Loading = () => {
   const mountRef = useRef(null);
 
   useEffect(() => {
     const currentMount = mountRef.current;
-    if (!currentMount) return;
 
     // --- Scene Setup ---
     const scene = new THREE.Scene();
@@ -42,7 +42,7 @@ export default function Loading() {
     composer.addPass(new OutputPass());
 
     // --- Geometry ---
-    const gridSize = 12;
+    const gridSize = 15;
     const spacing = 0.15;
     const nodeGeometry = new THREE.BufferGeometry();
     const nodeMaterial = new THREE.PointsMaterial({
@@ -110,14 +110,46 @@ export default function Loading() {
     const lineSegments = new THREE.LineSegments(lineGeometry, linematerial);
     scene.add(lineSegments);
 
-    const rotationSpeedX = (Math.random() - 0.5) * 0.17;
-    const rotationSpeedY = (Math.random() - 0.5) * 0.17;
+    // --- Text Setup ---
+    const textCanvas = document.createElement("canvas");
+    const context = textCanvas.getContext("2d");
+    const canvasWidth = 512;
+    const canvasHeight = 128;
+    textCanvas.width = canvasWidth;
+    textCanvas.height = canvasHeight;
+    context.font = "bold 25px 'Lucida Grande', sans-serif";
+    context.fillStyle = "#666666";
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+
+    const textTexture = new THREE.CanvasTexture(textCanvas);
+    const textMaterial = new THREE.SpriteMaterial({
+      map: textTexture,
+      transparent: true,
+    });
+    const textSprite = new THREE.Sprite(textMaterial);
+    textSprite.scale.set(6, 6 * (canvasHeight / canvasWidth), 1);
+    textSprite.position.y = -2.5;
+    scene.add(textSprite);
+
+    const rotationSpeedX = (Math.random() - 0.5) * 0.27;
+    const rotationSpeedY = (Math.random() - 0.5) * 0.27;
 
     // --- Animation Loop ---
-    let animationFrameId;
+    const clock = new THREE.Clock();
 
+    let animationFrameId;
     const animate = () => {
-      // Rotate nodes and lines
+      const elapsedTime = clock.getElapsedTime();
+
+      // Infinite "Now Loading..." animation
+      const dots = ".".repeat(Math.floor(elapsedTime * 2) % 4);
+      const loadingString = `Now Loading${dots}`;
+
+      context.clearRect(0, 0, canvasWidth, canvasHeight);
+      context.fillText(loadingString, canvasWidth / 2, canvasHeight / 2);
+      textTexture.needsUpdate = true;
+
       nodePoints.rotation.x += rotationSpeedX;
       lineSegments.rotation.x += rotationSpeedX;
       nodePoints.rotation.y += rotationSpeedY;
@@ -141,12 +173,10 @@ export default function Loading() {
       cancelAnimationFrame(animationFrameId);
       currentMount.removeChild(renderer.domElement);
       renderer.dispose();
-      nodeGeometry.dispose();
-      nodeMaterial.dispose();
-      lineGeometry.dispose();
-      linematerial.dispose();
     };
   }, []);
 
-  return <div className="w-full h-full" ref={mountRef}></div>;
-}
+  return <div className="loading-canvas-container" ref={mountRef}></div>;
+};
+
+export default Loading;
